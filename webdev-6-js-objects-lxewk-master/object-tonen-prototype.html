@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Lionel Messi</h1>
+
+<p>Gegeven:</p>
+<ul>
+    <li><strong>Gegeven:</strong> een fifa-speler object</li>
+    <li>Print met behulp van prototype de volgende dingen uit:
+        <ul>
+            <li>Volledige naam</li>
+            <li id="volnaam"></li>
+            <li>"De lengte van *achternaam* is *lengte*"</li>
+            <li id="tall"></li>
+        </ul>
+    </li>
+    <li>
+        Maak een prototype function, waarmee je de score-rating met 1 kan verhogen. Voeg daarin een check toe dat de
+        score-rating niet boven de score-potential uit kan komen
+    </li>
+    <li>
+        <strong>Hint: </strong>Prototype werkt alleen op Object-constructors. Het object moet dus aangepast worden.
+    </li>
+    <li>
+        Doe een JSON.stringify op het javascript object
+    </li>
+    <li id="jsoNotation"></li>
+</ul>
+
+<script>
+    function Speler(firstName, lastName, tall, salary, scoreRating, scorePotential) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.tall = tall;
+        this.salary = salary;
+        this.scoreRating = scoreRating;
+        this.scorePotential = scorePotential;
+    }
+    
+    let fifaSpeler = new Speler("Lionel", "Messi", 1.56, 10000000, 94, 96);
+
+    Speler.prototype.fullName = function() {
+        return this.firstName + " " + this.lastName;
+    };
+
+    Speler.prototype.bodyLength = function() {
+        return "De lengte van " + this.lastName + " is " + this.tall;
+    };
+    
+    Speler.prototype.scoreVerhogen = function() {
+        if(this.scoreRating < this.scorePotential) {
+            this.scoreRating++;
+            return true;
+        }
+        return false;
+    };
+
+    console.log(fifaSpeler.scoreVerhogen());
+
+    let jsonThing = JSON.stringify(fifaSpeler);
+    console.log(jsonThing);
+    let naam = fifaSpeler.fullName();
+    let hoogte = fifaSpeler.bodyLength();
+
+    document.getElementById("volnaam").innerText = naam;
+    document.getElementById("tall").innerText = hoogte;
+    document.getElementById("jsoNotation").innerText = jsonThing;
+
+</script>
+</body>
+</html>
